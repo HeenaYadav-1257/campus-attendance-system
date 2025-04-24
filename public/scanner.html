@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <title>Attendance Scanner</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js" as="script" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        #video {
+            transform: scaleX(-1);
+            object-fit: cover;
+            background: black;
+        }
+        #camera-container {
+            aspect-ratio: 4/3;
+            background: black;
+        }
+        .location-status { transition: all 0.3s; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-md mx-auto p-4">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <!-- Camera Feed -->
+            <div id="camera-container" class="relative">
+                <video id="video" autoplay playsinline muted></video>
+                <div id="camera-error" class="hidden absolute inset-0 flex items-center justify-center bg-black/80 text-white">
+                    <div class="text-center p-4">
+                        <i class="fas fa-camera-slash text-4xl mb-2"></i>
+                        <p>Camera access required</p>
+                        <button id="retry-camera" class="mt-2 px-4 py-2 bg-blue-600 rounded-lg">
+                            Retry Camera
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location Status -->
+            <div id="locationBox" class="location-status p-4 text-center">
+                <p id="coordinates" class="font-mono text-sm">Initializing system...</p>
+            </div>
+
+            <!-- Action Button -->
+            <button id="scanBtn" class="w-full bg-blue-600 text-white py-3 hover:bg-blue-700 disabled:bg-gray-400">
+                <i class="fas fa-camera mr-2"></i> Mark Attendance
+            </button>
+        </div>
+
+        <!-- Result Display -->
+        <div id="result" class="hidden mt-4 p-4 rounded-lg"></div>
+    </div>
+
+    <!-- Load scripts in correct order -->
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/scanner.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+2023-05-29  Regina Obe <lr@pcorp.us>
+
+	* ci/winnie/build_postgis.sh, ci/winnie/package_postgis.sh,
+	ci/winnie/regress_postgis.sh: Update versions of windows packages,
+	and ship projsync.exe
+
+2023-05-29  Regina Obe <lr@pcorp.us>
+
+	* NEWS, README.postgis, Version.config, doc/release_notes.xml,
+	extensions/upgradeable_versions.mk: Prep for PostGIS 3.3.3 release
+
+2023-05-28  Regina Obe <lr@pcorp.us>
+
+	* regress/core/tickets.sql, regress/core/tickets_expected: Add test
+	for PostGIS 3.3.3 References #5378
+
+2023-05-24  Regina Obe <lr@pcorp.us>
+
+	* NEWS, extras/tiger_geocoder/tiger_loader_2022.sql: Fix tiger 2022
+	 faces load - Add uace20 to exclusions column list References #5388 for PostGIS 3.3.3
+
+2023-05-17  Sandro Santilli <strk@kbt.io>
+
+	* postgis/geography_inout.c: Fix write past end of block in GML
+	output References #5384 in 3.3 branch (3.3.3dev)
+
+2023-05-17  Sandro Santilli <strk@kbt.io>
+
+	* NEWS, postgis/geography_inout.c, regress/core/out_gml.sql,
+	regress/core/out_gml_expected, regress/core/tests.mk.in: Fix crash
+	in ST_AsGML when given id is longer than given prefix Includes regress test.  References #5384 in 3.3 branch (3.3.3dev)
+
+2023-05-09  Sandro Santilli <strk@kbt.io>
+
+	* regress/core/regress_buffer_params.sql,
+	regress/core/regress_buffer_params_expected: Normalize GEOS
+	polygonal results from Buffer ops
+
+2023-05-09  Sandro Santilli <strk@kbt.io>
+
+	* regress/core/offsetcurve.sql: Ignore collinear vertices in
+	offsetcurve Fixes a failure with newer GEOS code which results in an additional
+	vertex (collinear to the existing segment).
+
+2023-05-12  Sandro Santilli <strk@kbt.io>
+
+	* regress/hooks/hook-after-upgrade.sql: Fix upgrade test by dropping
+	deprecated function after upgrade
+
+2023-05-12  Sandro Santilli <strk@kbt.io>
+
+	* NEWS, postgis/geography.sql.in,
+	postgis/postgis_after_upgrade.sql,
+	regress/hooks/hook-after-upgrade.sql,
+	regress/hooks/hook-before-upgrade.sql: Fix 2.5 upgrades with views
+	using geography based ST_Distance Include tests References #5380 in 3.3 branch (3.3.3dev)
+
+2023-05-12  Sandro Santilli <strk@kbt.io>
+
+	* ci/github/run_coverage.sh: [gha] Enable verbosity on check step in
+	coverage test
+
+2023-05-12  Sandro Santilli <strk@kbt.io>
+
+	* postgis/Makefile.in: Encode dependency of postgis.sql on its
+	effective sources
+
+2023-04-27  Paul Ramsey <pramsey@cleverelephant.ca>
+
+	* NEWS, postgis/geography.sql.in: Retain SRID through
+	ST_Buffer(geography) call, references #5378
+
+2023-04-26  Regina Obe <lr@pcorp.us>
+
+	* ci/winnie/build_postgis.sh, ci/winnie/package_postgis.sh,
+	ci/winnie/regress_postgis.sh: Revise winnie paths to support new
+	location of proj 8+
+
+2023-04-24  Regina Obe <lr@pcorp.us>
+
+	* NEWS: add Laurenz Albe to PG16 news credits
+
+2023-04-23  Regina Obe <lr@pcorp.us>
+
+	* NEWS, postgis/lwgeom_union.c: Fix crash on ST_Union References
+	#5371 for PostGIS 3.3.3
+
+2023-04-23  Regina Obe <lr@pcorp.us>
+
+	* .cirrus.yml, ci/bessie/postgis_regress.sh: FreeBSD bots - Turn off cirrus testing on 12.3 - Disable raster testing on bessie   (current issue with GDAL 3.6 pkg packaging)
+
+2023-04-22  Regina Obe <lr@pcorp.us>
+
+	* liblwgeom/liblwgeom.h.in: Fix for PG 13 and below Evidentally
+	stdbool is not included in PG13 and below So added changes for
+	raster for PG16, broke PG 13 Closes
+	https://github.com/postgis/postgis/pull/716
+
+2022-12-13  Paul Ramsey <pramsey@cleverelephant.ca>
+
+	* .github/workflows/ci.yml, .gitignore, NEWS,
+	extensions/address_standardizer/std_pg_hash.c,
+	libpgcommon/lwgeom_pg.c, libpgcommon/lwgeom_pg.h,
+	libpgcommon/shared_gserialized.c, postgis/flatgeobuf.c,
+	postgis/gserialized_gist_2d.c, postgis/gserialized_gist_nd.c,
+	postgis/gserialized_spgist_2d.c, postgis/lwgeom_box3d.c,
+	postgis/lwgeom_geos.c, postgis/lwgeom_triggers.c,
+	raster/rt_core/rt_band.c, raster/rt_pg/rtpg_band_properties.c,
+	raster/rt_pg/rtpg_gdal.c, raster/rt_pg/rtpg_inout.c,
+	raster/rt_pg/rtpg_mapalgebra.c, raster/rt_pg/rtpostgis.c,
+	raster/rt_pg/rtpostgis.h, regress/core/geos310.sql,
+	regress/core/geos310_expected, regress/core/geos312.sql,
+	regress/core/geos312_expected, regress/core/tests.mk.in,
+	regress/core/tickets.sql, regress/core/tickets_expected,
+	regress/core/union.sql: Support build on Pg16devel for PostGIS 3.3.3 Closes #5257 Closes #5261 Closes #5277 Closes #5308 Closes #5374
+	Closes https://github.com/postgis/postgis/pull/716
+
+2023-04-21  Sandro Santilli <strk@kbt.io>
+
+	* Force C locale and libc provider in regress test db with PG15+ This is probably a workaround to a bug in PostgreSQL 16, but it
+	feels like the smallest change to fix #5375
+
